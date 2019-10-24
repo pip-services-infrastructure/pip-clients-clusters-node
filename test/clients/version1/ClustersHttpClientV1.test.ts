@@ -8,12 +8,20 @@ import { ConsoleLogger } from 'pip-services-components-node';
 
 import { ClustersMemoryPersistence } from 'pip-services-clusters-node';
 import { ClustersController } from 'pip-services-clusters-node';
-import { IClustersClientV1 } from '../../src/clients/version1/IClustersClientV1';
-import { ClustersDirectClientV1 } from '../../src/clients/version1/ClustersDirectClientV1';
+import { ClustersHttpServiceV1 } from 'pip-services-clusters-node';
+import { IClustersClientV1 } from '../../../src/clients/version1/IClustersClientV1';
+import { ClustersHttpClientV1 } from '../../../src/clients/version1/ClustersHttpClientV1';
 import { ClustersClientFixtureV1 } from './ClustersClientFixtureV1';
 
-suite('ClustersDirectClientV1', ()=> {
-    let client: ClustersDirectClientV1;
+var httpConfig = ConfigParams.fromTuples(
+    "connection.protocol", "http",
+    "connection.host", "localhost",
+    "connection.port", 3000
+);
+
+suite('ClustersRestClientV1', ()=> {
+    let service: ClustersHttpServiceV1;
+    let client: ClustersHttpClientV1;
     let fixture: ClustersClientFixtureV1;
 
     suiteSetup((done) => {
@@ -21,23 +29,32 @@ suite('ClustersDirectClientV1', ()=> {
         let persistence = new ClustersMemoryPersistence();
         let controller = new ClustersController();
 
+        service = new ClustersHttpServiceV1();
+        service.configure(httpConfig);
+
         let references: References = References.fromTuples(
             new Descriptor('pip-services', 'logger', 'console', 'default', '1.0'), logger,
             new Descriptor('pip-services-clusters', 'persistence', 'memory', 'default', '1.0'), persistence,
             new Descriptor('pip-services-clusters', 'controller', 'default', 'default', '1.0'), controller,
+            new Descriptor('pip-services-clusters', 'service', 'http', 'default', '1.0'), service
         );
         controller.setReferences(references);
+        service.setReferences(references);
 
-        client = new ClustersDirectClientV1();
+        client = new ClustersHttpClientV1();
         client.setReferences(references);
+        client.configure(httpConfig);
 
         fixture = new ClustersClientFixtureV1(client);
 
-        client.open(null, done);
+        service.open(null, (err) => {
+            client.open(null, done);
+        });
     });
     
     suiteTeardown((done) => {
-        client.close(null, done);
+        client.close(null);
+        service.close(null, done);
     });
 
     test('CRUD Operations', (done) => {

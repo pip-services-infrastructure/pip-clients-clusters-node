@@ -3,7 +3,7 @@ let process = require('process');
 import { ConfigParams } from 'pip-services-commons-node';
 
 import { ClustersClientFixtureV1 } from './ClustersClientFixtureV1';
-import { ClustersLambdaClientV1 } from '../../src/clients/version1/ClustersLambdaClientV1';
+import { ClustersLambdaClientV1 } from '../../../src/clients/version1/ClustersLambdaClientV1';
 
 suite('ClustersLambdaClient', ()=> {
     let AWS_LAMDBA_ARN = process.env["AWS_LAMDBA_ARN"] || "";

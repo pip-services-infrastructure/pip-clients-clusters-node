@@ -4,8 +4,8 @@ let assert = require('chai').assert;
 
 import { PagingParams } from 'pip-services-commons-node';
 
-import { ClusterV1 } from '../../src/data/version1/ClusterV1';
-import { IClustersClientV1 } from '../../src/clients/version1/IClustersClientV1';
+import { ClusterV1 } from '../../../src/data/version1/ClusterV1';
+import { IClustersClientV1 } from '../../../src/clients/version1/IClustersClientV1';
 
 let CLUSTER1: ClusterV1 = {
     id: '1',

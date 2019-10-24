@@ -8,8 +8,8 @@ import { ConsoleLogger } from 'pip-services-components-node';
 
 import { ClustersMemoryPersistence } from 'pip-services-clusters-node';
 import { ClustersController } from 'pip-services-clusters-node';
-import { IClustersClientV1 } from '../../src/clients/version1/IClustersClientV1';
-import { ClustersMemoryClientV1 } from '../../src/clients/version1/ClustersMemoryClientV1';
+import { IClustersClientV1 } from '../../../src/clients/version1/IClustersClientV1';
+import { ClustersMemoryClientV1 } from '../../../src/clients/version1/ClustersMemoryClientV1';
 import { ClustersClientFixtureV1 } from './ClustersClientFixtureV1';
 
 suite('ClustersMemoryClientV1', ()=> {
