@@ -80,44 +80,120 @@ client.open(null, function(err) {
 Now the client is ready to perform operations:
 
 Create new cluster:
-```typescript    
-    client.createCluster(correlationId: string, cluster: ClusterV1, 
-        callback: (err: any, cluster: ClusterV1) => void);
+```typescript 
+let CLUSTER1: ClusterV1 = {
+    id: '1',
+    name: 'Cluster #1',
+    type: 'root',
+    active: true,
+    api_host: 'api.mycluster1.com',
+    service_ports: { myservice1: 30001, myservice2: 30002 },
+    max_tenant_count: 1,
+    tenants_count: 1,
+    active_tenants: ['1']
+};   
+
+    client.createCluster("123", CLUSTER1, (err, cluster){
+        if (err != null) {
+            console.error('Can\'t create cluster!');
+            console.error(err);
+        } else {
+            console.dir('Cluster was created successfull');
+        }
+    });
 ```
 Update exists cluster:
 ```typescript
-    client.updateCluster(correlationId: string, cluster: ClusterV1, 
-        callback: (err: any, cluster: ClusterV1) => void);
+    CLUSTER1.name = "Cluster #2";
+    client.updateCluster("123", CLUSTER1, (err, cluster){
+        if (err != null) {
+            console.error('Can\'t update cluster!');
+            console.error(err);
+        } else {
+            console.dir('Cluster was updated successfull');
+        }
+    });
 ```
 Delete existing cluster by cluster_id
 ```typescript    
-    client.deleteClusterById(correlationId: string, cluster_id: string,
-        callback: (err: any, cluster: ClusterV1) => void);
+    client.deleteClusterById("123", 1, (err, cluster){
+        if (err != null) {
+            console.error('Can\'t delete cluster!');
+            console.error(err);
+        } else {
+            console.dir('Cluster was delete successfull');
+            console.dir('Deleted cluster:');
+            console.dir(cluster.toString());
+        }
+    });
 ```
-Add new tenant
+Add new tenant into active cluster
 ```typescript
-    client.addTenant(correlationId: string, tenantId: string, 
-        callback: (err: any, cluster: ClusterV1) => void);
+    client.addTenant("123", "5", (err, cluster) {
+        if (err != null) {
+            console.error('Can\'t add tenant to cluster!');
+            console.error(err);
+        } else {
+            console.dir('Tenant was added successfull');
+            console.dir('Cluster:');
+            console.dir(cluster.toString());
+        }
+    });
 ```
 Remove existing tenant by tenantId
 ```typescript
-    client.removeTenant(correlationId: string, tenantId: string, 
-        callback: (err: any, cluster: ClusterV1) => void);
+    client.removeTenant("123", "5", (err, cluster) {
+        if (err != null) {
+            console.error('Can\'t delete tenant from cluster!');
+            console.error(err);
+        } else {
+            console.dir('Tenant was deleted successfull');
+            console.dir('Cluster:');
+            console.dir(cluster.toString());
+        }
+    });
 ```
 Get list of all clusters:
 ```typescript
-    client.getClusters(correlationId: string, filter: FilterParams, paging: PagingParams, 
-        callback: (err: any, page: DataPage<ClusterV1>) => void);
+    let filter = FilterParams.fromTuples(
+        'active', true,
+        'open', true
+    );
+    client.getClusters("123", filter, new PagingParams(), (err, clusters){
+        if (err != null) {
+            console.error('Can\'t find cluster by filter!');
+            console.error(err);
+        } else {
+            console.dir("Cluster list length:");
+            console.dir(clusters.data.length);
+        }
+    });
 ```
 Get cluster by cluster_id:
 ```typescript
-    client.getClusterById(correlationId: string, cluster_id: string, 
-        callback: (err: any, cluster: ClusterV1) => void);
+    client.getClusterById("123", "1", (err, cluster){
+         if (err != null) {
+            console.error('Can\'t find cluster by cluster id!');
+            console.error(err);
+        } else {
+            console.dir('Cluster was finded successfull');
+            console.dir('Cluster:');
+            console.dir(cluster.toString());
+        }
+    });
 ```
 Get cluster by tenant:
 ```typescript
-    client.getClusterByTenant(correlationId: string, tenant_id: string, 
-        callback: (err: any, cluster: ClusterV1) => void);
+    client.getClusterByTenant("123", "5", (err, cluster){
+        if (err != null) {
+            console.error('Can\'t find cluster by tenant id!');
+            console.error(err);
+        } else {
+            console.dir('Cluster was finded successfull');
+            console.dir('Cluster:');
+            console.dir(cluster.toString());
+        }
+    });
 ```
 
 ## Acknowledgements
