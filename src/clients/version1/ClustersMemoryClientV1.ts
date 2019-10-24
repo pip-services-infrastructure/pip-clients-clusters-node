@@ -109,7 +109,7 @@ export class ClustersMemoryClientV1 implements IClustersClientV1 {
         cluster.id = cluster.id || IdGenerator.nextLong();
         cluster.update_time = cluster.update_time || new Date();
         cluster.active = cluster.active != null || true;
-        cluster.open = cluster.max_tenants_count > cluster.tenants_count;
+        cluster.open = cluster.max_tenant_count > cluster.tenants_count;
 
         this._clusters.push(cluster);
         callback(null, cluster);
@@ -118,7 +118,7 @@ export class ClustersMemoryClientV1 implements IClustersClientV1 {
     public updateCluster(correlationId: string, cluster: ClusterV1, 
         callback: (err: any, cluster: ClusterV1) => void): void {
 
-        cluster.open = cluster.max_tenants_count > cluster.tenants_count;
+        cluster.open = cluster.max_tenant_count > cluster.tenants_count;
 
         this._clusters = _.filter(this._clusters, (d) => d.id != cluster.id);
         this._clusters.push(cluster);
@@ -143,7 +143,7 @@ export class ClustersMemoryClientV1 implements IClustersClientV1 {
             cluster.active_tenants = cluster.active_tenants || [];
             cluster.active_tenants.push(tenantId);
             cluster.tenants_count++;
-            cluster.open = cluster.max_tenants_count > cluster.tenants_count;
+            cluster.open = cluster.max_tenant_count > cluster.tenants_count;
         }
 
         callback(null, cluster);
@@ -156,7 +156,7 @@ export class ClustersMemoryClientV1 implements IClustersClientV1 {
         if (cluster) {
             cluster.active_tenants = _.filter(cluster.active_tenants, s => s != tenantId);
             cluster.tenants_count--;
-            cluster.open = cluster.max_tenants_count > cluster.tenants_count;
+            cluster.open = cluster.max_tenant_count > cluster.tenants_count;
         }
 
         callback(null, cluster);
