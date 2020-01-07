@@ -1,5 +1,5 @@
-import { Descriptor } from 'pip-services-commons-node';
-import { Factory } from 'pip-services-components-node';
+import { Descriptor } from 'pip-services3-commons-node';
+import { Factory } from 'pip-services3-components-node';
 
 import { ClustersNullClientV1 } from '../clients/version1/ClustersNullClientV1';
 import { ClustersMemoryClientV1 } from '../clients/version1/ClustersMemoryClientV1';

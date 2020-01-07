@@ -36,11 +36,10 @@
         "rebenchmark": "tsc && matcha -R clean -I tdd ./obj/benchmark/run.js"
     },
     "dependencies": {
-        "pip-services-commons-node": "^3.0.0",
-        "pip-services-components-node": "^3.0.0",
-        "pip-services-rpc-node": "^3.0.0",
-        "pip-services-seneca-node": "^3.0.0",
-        "pip-services-aws-node": "^3.0.0"
+        "pip-services3-commons-node": "^3.0.0",
+        "pip-services3-components-node": "^3.0.0",
+        "pip-services3-rpc-node": "^3.0.0",
+        "pip-services3-aws-node": "^3.0.0"
     },
     "devDependencies": {
         "@types/node": "*",
@@ -48,13 +47,9 @@
         "@types/async": "^2.0.0",
         "@types/chai": "*",
         "@types/mocha": "*",
-        "@types/mongodb": "^2.1.38",
-        "@types/mongoose": "^4.7.4",
         "restify": "^4.3.0",
         "chai": "*",
-        "matcha": "*",
         "mocha": "*",
-        "aws-sdk": "*",
-        "pip-services-clusters-node": "https://github.com/pip-services-infrastructure/pip-services-clusters-node.git"
+        "pip-services-clusters-node": "^1.0.0"
     }
 }

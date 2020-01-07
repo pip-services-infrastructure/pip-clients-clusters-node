@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 let _ = require('lodash');
-const pip_services_commons_node_1 = require("pip-services-commons-node");
-const pip_services_commons_node_2 = require("pip-services-commons-node");
-const pip_services_commons_node_3 = require("pip-services-commons-node");
+const pip_services3_commons_node_1 = require("pip-services3-commons-node");
+const pip_services3_commons_node_2 = require("pip-services3-commons-node");
+const pip_services3_commons_node_3 = require("pip-services3-commons-node");
 class ClustersMemoryClientV1 {
     constructor() {
         this._clusters = [];
@@ -34,7 +34,7 @@ class ClustersMemoryClientV1 {
         return false;
     }
     composeFilter(filter) {
-        filter = filter || new pip_services_commons_node_1.FilterParams();
+        filter = filter || new pip_services3_commons_node_1.FilterParams();
         let search = filter.getAsNullableString('search');
         let id = filter.getAsNullableString('id');
         let name = filter.getAsNullableString('name');
@@ -70,7 +70,7 @@ class ClustersMemoryClientV1 {
     }
     getClusters(correlationId, filter, paging, callback) {
         let clusters = _.filter(this._clusters, this.composeFilter(filter));
-        callback(null, new pip_services_commons_node_2.DataPage(clusters, clusters.length));
+        callback(null, new pip_services3_commons_node_2.DataPage(clusters, clusters.length));
     }
     getClusterById(correlationId, clusterId, callback) {
         let cluster = _.find(this._clusters, (d) => d.id == clusterId);
@@ -81,7 +81,7 @@ class ClustersMemoryClientV1 {
         callback(null, cluster);
     }
     createCluster(correlationId, cluster, callback) {
-        cluster.id = cluster.id || pip_services_commons_node_3.IdGenerator.nextLong();
+        cluster.id = cluster.id || pip_services3_commons_node_3.IdGenerator.nextLong();
         cluster.update_time = cluster.update_time || new Date();
         cluster.active = cluster.active != null || true;
         cluster.open = cluster.max_tenant_count > cluster.tenants_count;

@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const pip_services_commons_node_1 = require("pip-services-commons-node");
-const pip_services_commons_node_2 = require("pip-services-commons-node");
-const pip_services_rpc_node_1 = require("pip-services-rpc-node");
-class ClustersDirectClientV1 extends pip_services_rpc_node_1.DirectClient {
+const pip_services3_commons_node_1 = require("pip-services3-commons-node");
+const pip_services3_commons_node_2 = require("pip-services3-commons-node");
+const pip_services3_rpc_node_1 = require("pip-services3-rpc-node");
+class ClustersDirectClientV1 extends pip_services3_rpc_node_1.DirectClient {
     constructor() {
         super();
-        this._dependencyResolver.put('controller', new pip_services_commons_node_1.Descriptor("pip-services-clusters", "controller", "*", "*", "*"));
+        this._dependencyResolver.put('controller', new pip_services3_commons_node_1.Descriptor("pip-services-clusters", "controller", "*", "*", "*"));
     }
     getClusters(correlationId, filter, paging, callback) {
         let timing = this.instrument(correlationId, 'clusters.get_clusters');
@@ -23,7 +23,7 @@ class ClustersDirectClientV1 extends pip_services_rpc_node_1.DirectClient {
         });
     }
     getClusterByTenant(correlationId, tenantId, callback) {
-        let filter = pip_services_commons_node_2.FilterParams.fromTuples('active', true, 'tenant_id', tenantId);
+        let filter = pip_services3_commons_node_2.FilterParams.fromTuples('active', true, 'tenant_id', tenantId);
         this.getClusters(correlationId, filter, null, (err, page) => {
             if (page && page.data && page.data.length > 0)
                 callback(err, page.data[0]);

@@ -1,5 +1,5 @@
-import { Descriptor } from 'pip-services-commons-node';
-import { Factory } from 'pip-services-components-node';
+import { Descriptor } from 'pip-services3-commons-node';
+import { Factory } from 'pip-services3-components-node';
 export declare class ClustersClientFactory extends Factory {
     static Descriptor: Descriptor;
     static NullClientV1Descriptor: Descriptor;

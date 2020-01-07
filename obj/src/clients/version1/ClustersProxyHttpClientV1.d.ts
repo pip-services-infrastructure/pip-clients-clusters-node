@@ -1,8 +1,8 @@
-import { ConfigParams } from 'pip-services-commons-node';
-import { IClosable } from 'pip-services-commons-node';
-import { IConfigurable } from 'pip-services-commons-node';
-import { IReferences } from 'pip-services-commons-node';
-import { IReferenceable } from 'pip-services-commons-node';
+import { ConfigParams } from 'pip-services3-commons-node';
+import { IClosable } from 'pip-services3-commons-node';
+import { IConfigurable } from 'pip-services3-commons-node';
+import { IReferences } from 'pip-services3-commons-node';
+import { IReferenceable } from 'pip-services3-commons-node';
 export declare class ClustersProxyHttpClientV1<T> implements IConfigurable, IReferenceable, IClosable {
     private _factory;
     private _serviceName;

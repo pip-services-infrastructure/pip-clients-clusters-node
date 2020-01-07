@@ -1,13 +1,13 @@
 const async = require('async');
 
-import { ConfigParams } from 'pip-services-commons-node';
-import { IClosable } from 'pip-services-commons-node';
-import { IConfigurable } from 'pip-services-commons-node';
-import { IReferences } from 'pip-services-commons-node';
-import { IReferenceable } from 'pip-services-commons-node';
-import { Descriptor } from 'pip-services-commons-node';
-import { ReferenceException } from 'pip-services-commons-node';
-import { InternalException } from 'pip-services-commons-node';
+import { ConfigParams } from 'pip-services3-commons-node';
+import { IClosable } from 'pip-services3-commons-node';
+import { IConfigurable } from 'pip-services3-commons-node';
+import { IReferences } from 'pip-services3-commons-node';
+import { IReferenceable } from 'pip-services3-commons-node';
+import { Descriptor } from 'pip-services3-commons-node';
+import { ReferenceException } from 'pip-services3-commons-node';
+import { InternalException } from 'pip-services3-commons-node';
 
 import { ClusterV1 } from '../../data/version1/ClusterV1';
 import { IClustersClientV1 } from './IClustersClientV1';
@@ -79,7 +79,7 @@ export class ClustersProxyHttpClientV1<T>
         // Check tenant id
         if (tenantId == null) {
             let err = new InternalException(
-                correlationId, 'NO_SITE_ID', 'Tenant ID is not specified'
+                correlationId, 'NO_TENANT_ID', 'Tenant ID is not specified'
             );
             callback(err, null);
             return;
@@ -123,7 +123,7 @@ export class ClustersProxyHttpClientV1<T>
             (callback) => {
                 if (cluster == null) {
                     let err = new InternalException(
-                        correlationId, 'SITE_CLUSTER_NOT_FOUND', 'Tenant cluster was not found'
+                        correlationId, 'TENANT_CLUSTER_NOT_FOUND', 'Tenant cluster was not found'
                     );
                     callback(err);
                     return;

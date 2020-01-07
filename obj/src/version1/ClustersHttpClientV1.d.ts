@@ -1,7 +1,7 @@
-import { FilterParams } from 'pip-services-commons-node';
-import { PagingParams } from 'pip-services-commons-node';
-import { DataPage } from 'pip-services-commons-node';
-import { CommandableHttpClient } from 'pip-services-rpc-node';
+import { FilterParams } from 'pip-services3-commons-node';
+import { PagingParams } from 'pip-services3-commons-node';
+import { DataPage } from 'pip-services3-commons-node';
+import { CommandableHttpClient } from 'pip-services3-rpc-node';
 import { ClusterV1 } from './ClusterV1';
 import { IClustersClientV1 } from './IClustersClientV1';
 export declare class ClustersHttpClientV1 extends CommandableHttpClient implements IClustersClientV1 {

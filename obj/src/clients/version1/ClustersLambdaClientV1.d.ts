@@ -1,7 +1,7 @@
-import { FilterParams } from 'pip-services-commons-node';
-import { PagingParams } from 'pip-services-commons-node';
-import { DataPage } from 'pip-services-commons-node';
-import { CommandableLambdaClient } from 'pip-services-aws-node';
+import { FilterParams } from 'pip-services3-commons-node';
+import { PagingParams } from 'pip-services3-commons-node';
+import { DataPage } from 'pip-services3-commons-node';
+import { CommandableLambdaClient } from 'pip-services3-aws-node';
 import { ClusterV1 } from '../../data/version1/ClusterV1';
 import { IClustersClientV1 } from './IClustersClientV1';
 export declare class ClustersLambdaClientV1 extends CommandableLambdaClient implements IClustersClientV1 {

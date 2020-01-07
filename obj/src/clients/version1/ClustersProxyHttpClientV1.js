@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const async = require('async');
-const pip_services_commons_node_1 = require("pip-services-commons-node");
-const pip_services_commons_node_2 = require("pip-services-commons-node");
-const pip_services_commons_node_3 = require("pip-services-commons-node");
-const pip_services_commons_node_4 = require("pip-services-commons-node");
+const pip_services3_commons_node_1 = require("pip-services3-commons-node");
+const pip_services3_commons_node_2 = require("pip-services3-commons-node");
+const pip_services3_commons_node_3 = require("pip-services3-commons-node");
+const pip_services3_commons_node_4 = require("pip-services3-commons-node");
 class ClustersProxyHttpClientV1 {
     constructor(factory, serviceName, defaultPort) {
         this._cacheTimeout = 900000;
@@ -25,7 +25,7 @@ class ClustersProxyHttpClientV1 {
     }
     setReferences(references) {
         this._references = references;
-        this._clustersClient = references.getOneRequired(new pip_services_commons_node_2.Descriptor('pip-services-clusters', 'client', '*', '*', '1.0'));
+        this._clustersClient = references.getOneRequired(new pip_services3_commons_node_2.Descriptor('pip-services-clusters', 'client', '*', '*', '1.0'));
     }
     close(correlationId, callback) {
         this._cache = {};
@@ -49,7 +49,7 @@ class ClustersProxyHttpClientV1 {
     getClient(correlationId, tenantId, callback) {
         // Check tenant id
         if (tenantId == null) {
-            let err = new pip_services_commons_node_4.InternalException(correlationId, 'NO_SITE_ID', 'Tenant ID is not specified');
+            let err = new pip_services3_commons_node_4.InternalException(correlationId, 'NO_TENANT_ID', 'Tenant ID is not specified');
             callback(err, null);
             return;
         }
@@ -63,7 +63,7 @@ class ClustersProxyHttpClientV1 {
         }
         // Check for clusters client
         if (this._clustersClient == null) {
-            let err = new pip_services_commons_node_3.ReferenceException(correlationId, 'pip-services-clusters:client:*:*:1.0');
+            let err = new pip_services3_commons_node_3.ReferenceException(correlationId, 'pip-services-clusters:client:*:*:1.0');
             callback(err, null);
             return;
         }
@@ -83,22 +83,22 @@ class ClustersProxyHttpClientV1 {
             // Check for cluster
             (callback) => {
                 if (cluster == null) {
-                    let err = new pip_services_commons_node_4.InternalException(correlationId, 'SITE_CLUSTER_NOT_FOUND', 'Tenant cluster was not found');
+                    let err = new pip_services3_commons_node_4.InternalException(correlationId, 'TENANT_CLUSTER_NOT_FOUND', 'Tenant cluster was not found');
                     callback(err);
                     return;
                 }
                 if (!cluster.active) {
-                    let err = new pip_services_commons_node_4.InternalException(correlationId, 'CLUSTER_INACTIVE', 'Tenant cluster is not active');
+                    let err = new pip_services3_commons_node_4.InternalException(correlationId, 'CLUSTER_INACTIVE', 'Tenant cluster is not active');
                     callback(err);
                     return;
                 }
                 if (cluster.maintenance) {
-                    let err = new pip_services_commons_node_4.InternalException(correlationId, 'MAINTENANCE', 'Tenant cluster is on maintenance');
+                    let err = new pip_services3_commons_node_4.InternalException(correlationId, 'MAINTENANCE', 'Tenant cluster is on maintenance');
                     callback(err);
                     return;
                 }
                 if (cluster.api_host == null || cluster.api_host == "") {
-                    let err = new pip_services_commons_node_4.InternalException(correlationId, 'NO_CLUSTER_API_HOST', 'API host is not set in tenant cluster');
+                    let err = new pip_services3_commons_node_4.InternalException(correlationId, 'NO_CLUSTER_API_HOST', 'API host is not set in tenant cluster');
                     callback(err);
                     return;
                 }
@@ -118,7 +118,7 @@ class ClustersProxyHttpClientV1 {
                 // Create client using factory
                 let client = new this._factory();
                 // Configure client
-                let config = pip_services_commons_node_1.ConfigParams.fromTuples('connection.url', ref.url, 'connection.protocol', ref.protocol, 'connection.host', ref.host, 'connection.port', ref.port);
+                let config = pip_services3_commons_node_1.ConfigParams.fromTuples('connection.url', ref.url, 'connection.protocol', ref.protocol, 'connection.host', ref.host, 'connection.port', ref.port);
                 if (this._config)
                     config = config.setDefaults(this._config);
                 if (client.configure)

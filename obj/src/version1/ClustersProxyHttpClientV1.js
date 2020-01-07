@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const async = require('async');
-const pip_services_commons_node_1 = require("pip-services-commons-node");
-const pip_services_commons_node_2 = require("pip-services-commons-node");
-const pip_services_commons_node_3 = require("pip-services-commons-node");
-const pip_services_commons_node_4 = require("pip-services-commons-node");
+const pip_services_commons_node_1 = require("pip-services3-commons-node");
+const pip_services_commons_node_2 = require("pip-services3-commons-node");
+const pip_services_commons_node_3 = require("pip-services3-commons-node");
+const pip_services_commons_node_4 = require("pip-services3-commons-node");
 class ClustersProxyHttpClientV1 {
     constructor(factory, serviceName, defaultPort) {
         this._cacheTimeout = 900000;
@@ -49,7 +49,7 @@ class ClustersProxyHttpClientV1 {
     getClient(correlationId, tenantId, callback) {
         // Check tenant id
         if (tenantId == null) {
-            let err = new pip_services_commons_node_4.InternalException(correlationId, 'NO_SITE_ID', 'Tenant ID is not specified');
+            let err = new pip_services_commons_node_4.InternalException(correlationId, 'NO_TENANT_ID', 'Tenant ID is not specified');
             callback(err, null);
             return;
         }
@@ -83,7 +83,7 @@ class ClustersProxyHttpClientV1 {
             // Check for cluster
             (callback) => {
                 if (cluster == null) {
-                    let err = new pip_services_commons_node_4.InternalException(correlationId, 'SITE_CLUSTER_NOT_FOUND', 'Tenant cluster was not found');
+                    let err = new pip_services_commons_node_4.InternalException(correlationId, 'TENANT_CLUSTER_NOT_FOUND', 'Tenant cluster was not found');
                     callback(err);
                     return;
                 }

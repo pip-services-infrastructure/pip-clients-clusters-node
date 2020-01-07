@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const pip_services_commons_node_1 = require("pip-services-commons-node");
-const pip_services_commons_node_2 = require("pip-services-commons-node");
-const pip_services_rpc_node_1 = require("pip-services-rpc-node");
+const pip_services_commons_node_1 = require("pip-services3-commons-node");
+const pip_services_commons_node_2 = require("pip-services3-commons-node");
+const pip_services_rpc_node_1 = require("pip-services3-rpc-node");
 class ClustersDirectClientV1 extends pip_services_rpc_node_1.DirectClient {
     constructor() {
         super();
